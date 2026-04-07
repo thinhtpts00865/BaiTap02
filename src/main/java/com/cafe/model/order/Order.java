@@ -12,12 +12,19 @@ import java.util.List;
 public abstract class Order {
     protected List<MenuItem> items = new ArrayList<>();
 
-    public abstract boolean isValid();
-
+    /**
+     * Tính tổng giá trị hóa đơn (Order)
+     */
     public abstract double calculateTotal();
 
+    /**
+     * Hiển thị thông tin toàn bộ hóa đơn (Order)
+     */
     public abstract void displayInfo();
 
+    /**
+     * Thêm sản phẩm vào hóa đơn (Order)
+     */
     public void addItem(MenuItem item) {
         if (item != null && item.getName() != null && item.getPrice() >= 0) {
             items.add(item);
@@ -26,13 +33,14 @@ public abstract class Order {
         }
     }
 
+    /**
+     * Hiển thị thông tin chung hóa đơn (Order)
+     */
     public void displayBill() {
         System.out.println("-------------- Hóa đơn --------------");
-        int i = 1;
-        for (MenuItem item : items) {
-            System.out.println(" " + i + ". Tên món: " + item.getName());
-            System.out.print("\tThành tiền: " + String.format("%,.0f VNĐ", item.getPrice()) + "\n");
-            i++;
+        for (int i = 0; i < items.size(); i++) {
+            System.out.println(" " + (i + 1) + ". Tên món: " + items.get(i).getName());
+            System.out.print("\tThành tiền: " + String.format("%,.0f VNĐ", items.get(i).getPrice()) + "\n");
         }
         System.out.println("-------------------------------------");
         System.out.println("Tổng tiền: " + String.format("%,.0f VNĐ", calculateTotal()));

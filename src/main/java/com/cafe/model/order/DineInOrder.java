@@ -6,16 +6,24 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @NoArgsConstructor
-@AllArgsConstructor
-@Setter
-@Getter
 public class DineInOrder extends Order {
     private int tableNumber;
 
-    @Override
-    public boolean isValid() {
-        return tableNumber > 0;
+    public DineInOrder(int tableNumber) {
+        if (tableNumber <= 0) {
+            throw new IllegalArgumentException();
+        }
+        this.tableNumber = tableNumber;
+    }
+
+    public void setTableNumber(int tableNumber) {
+        if (tableNumber <= 0) {
+            throw new IllegalArgumentException();
+        }
+        this.tableNumber = tableNumber;
     }
 
     @Override
@@ -30,11 +38,7 @@ public class DineInOrder extends Order {
     @Override
     public void displayInfo() {
         System.out.println("\t\tĐƠN DÙNG TẠI CHỖ");
-        if (tableNumber > 0) {
-            System.out.println("Số bàn: " + tableNumber);
-            displayBill();
-        } else {
-            System.out.println("Số bàn không hợp lệ!");
-        }
+        System.out.println("Số bàn: " + tableNumber);
+        displayBill();
     }
 }

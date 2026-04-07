@@ -12,18 +12,14 @@ public class DeliveryOrder extends Order {
     private double shippingFee;
 
     @Override
-    public boolean isValid() {
-        return calculateTotal() > 50000 && address != null;
-    }
-
-    @Override
     public double calculateTotal() {
         double total = 0.0;
         for (MenuItem item : items) {
             total += item.getPrice();
         }
+        // Giá trị tối thiểu phải lớn hơn 50K
         if (total < 50000) {
-            return total;
+            throw new IllegalArgumentException();
         }
         return total + shippingFee;
     }
@@ -31,12 +27,8 @@ public class DeliveryOrder extends Order {
     @Override
     public void displayInfo() {
         System.out.println("\t\tĐƠN GIAO HÀNG");
-        if (isValid()) {
-            displayBill();
-            System.out.println("Phí vận chuyển: " + String.format("%,.0f VNĐ", shippingFee));
-            System.out.println("Địa chỉ: " + address);
-        } else {
-            System.out.println("Không đủ giá trị tối thiểu!");
-        }
+        displayBill();
+        System.out.println("Phí vận chuyển: " + String.format("%,.0f VNĐ", shippingFee));
+        System.out.println("Địa chỉ: " + address);
     }
 }

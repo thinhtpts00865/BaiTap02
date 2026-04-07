@@ -23,7 +23,7 @@ public class CafeSystem {
     public double calculateTotalRevenue() {
         double totalRevenue = 0;
         for (Order order : orders) {
-            if (order.isValid()) totalRevenue += order.calculateTotal();
+            totalRevenue += order.calculateTotal();
         }
         return totalRevenue;
     }

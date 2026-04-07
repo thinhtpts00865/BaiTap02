@@ -11,12 +11,9 @@ import lombok.Setter;
 @Setter
 @Getter
 public class TakeawayOrder extends Order {
+    // Phí đóng gói
+    private final double PACKAGING_FEE = 1.05;
     private String customerName;
-
-    @Override
-    public boolean isValid() {
-        return true;
-    }
 
     @Override
     public double calculateTotal() {
@@ -24,7 +21,7 @@ public class TakeawayOrder extends Order {
         for (MenuItem item : items) {
             total += item.getPrice();
         }
-        return total * 1.05;
+        return total * PACKAGING_FEE;
     }
 
     @Override
